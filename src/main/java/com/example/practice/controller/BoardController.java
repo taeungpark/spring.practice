@@ -1,6 +1,9 @@
 package com.example.practice.controller;
 
+import com.example.practice.dto.LoginInfo;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class BoardController {
     @GetMapping("/")
-    public String list(){
+    public String list(HttpSession session, Model model){ // Spring insert HttpSession, Model
+        LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
+        model.addAttribute("loginInfo", loginInfo);
         return "list";
     }
 

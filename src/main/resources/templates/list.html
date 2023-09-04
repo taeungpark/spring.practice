@@ -17,13 +17,16 @@
 
     <div class="login-info">
         <div class="container">
-            <span class="login-info_user">
+            <span class="login-info_user" th:if="${loginInfo != null}">
                 <span>Taeung Park</span>
             </span>
-            <span class="login-info_logout">
+            <span class="login-info_logout" th:if="${loginInfo != null}">
                 <a href="/logout">logout</a>
             </span>
-            <span class="login-info_join">
+            <span class="login-info_login" th:if="${loginInfo == null}">
+                <a href="/loginform">login</a>
+            </span>
+            <span class="login-info_join" th:if="${loginInfo == null}">
                 <a href="/userRegForm">register</a>
             </span>
         </div>
@@ -50,6 +53,7 @@
                         <p>test</p>
                     </th>
                     <td>1</td>
+                    <td>test1</td>
                     <td>2023.09.04</td>
                 </tr>
 
@@ -60,6 +64,7 @@
                         <p>test</p>
                     </th>
                     <td>0</td>
+                    <td>test2</td>
                     <td>2023.09.03</td>
                 </tr>
 
@@ -70,6 +75,7 @@
                         <p>test3</p>
                     </th>
                     <td>1</td>
+                    <td>test3</td>
                     <td>2023.09.02</td>
                 </tr>
 
