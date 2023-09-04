@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List of Board</title>
+    <link rel="stylesheet" href="board.css" />
+</head>
+<body>
+<section class="board">
+    <div class="page-title">
+        <div class="container">
+            <h3>List</h3>
+        </div>
+    </div>
+
+    <div class="login-info">
+        <div class="container">
+            <span class="login-info_user">
+                <span>Taeung Park</span>
+            </span>
+            <span class="login-info_logout">
+                <a href="/logout">logout</a>
+            </span>
+            <span class="login-info_join">
+                <a href="/userRegForm">register</a>
+            </span>
+        </div>
+    </div>
+
+    <!-- board list area -->
+    <div id="board-list">
+        <div class="container">
+            <table class="board-table">
+                <thead>
+                <tr>
+                    <th scope="col" class="th-num">number</th>
+                    <th scope="col" class="th-title">title</th>
+                    <th scope="col" class="th-viewcnt">count</th>
+                    <th scope="col" class="th-name">name</th>
+                    <th scope="col" class="th-date">date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>3</td>
+                    <th>
+                        <a href="/board?id=3">title1</a>
+                        <p>test</p>
+                    </th>
+                    <td>1</td>
+                    <td>2023.09.04</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <th>
+                        <a href="/board?id=2">title2</a>
+                        <p>test</p>
+                    </th>
+                    <td>0</td>
+                    <td>2023.09.03</td>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <th>
+                        <a href="/board?id=1">title3</a>
+                        <p>test3</p>
+                    </th>
+                    <td>1</td>
+                    <td>2023.09.02</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <a href="/writeForm">write</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>

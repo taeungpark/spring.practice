@@ -3,3 +3,7 @@ spring:
     url: jdbc:mysql://localhost:3306/practice
     username: root
     password: park123
+
+#  thymeleaf:
+#    prefix: classpath:/html/ #can change classpath (default = /templates/)
+#    suffix: .fm #can change extension name (default = .html)

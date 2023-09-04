@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+<H1 th:text="${board.title}"></H1>
+<div>name : <span th:text="${board.name}"></span></div>
+<div>title : <span th:text="${board.title}"></span></div>
+<div>count : <span th:text="${board.viewCnt}"></span></div>
+<div>date : <span th:text="${board.regdate}"></span></div>
+<div>post : <span th:text="${board.content}"></span></div>
+
+<div><a href="/">List</a></div>
+<!-- 로그인하지 않은 상황이라면 수정하기, 삭제하기 링크가 비활성화. 로그인한 사용자가 쓴 글인가? -->
+<div><a th:href="@{/updateform(boardId=${board.boardId})}">Edit</a></div>
+<div><a th:href="@{/delete(boardId=${board.boardId})}">Delete</a></div>
+</body>
+</html>
