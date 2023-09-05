@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Detail</title>
@@ -10,11 +10,14 @@
 <div>title : <span th:text="${board.title}"></span></div>
 <div>count : <span th:text="${board.viewCnt}"></span></div>
 <div>date : <span th:text="${board.regdate}"></span></div>
-<div>post : <span th:text="${board.content}"></span></div>
+<div>content : <span th:text="${board.content}"></span></div>
 
 <div><a href="/">List</a></div>
-<!-- 로그인하지 않은 상황이라면 수정하기, 삭제하기 링크가 비활성화. 로그인한 사용자가 쓴 글인가? -->
-<div><a th:href="@{/updateform(boardId=${board.boardId})}">Edit</a></div>
-<div><a th:href="@{/delete(boardId=${board.boardId})}">Delete</a></div>
+<div th:if="${loginInfo != null and loginInfo.name == board.name}">
+    <a th:href="@{/updateform(boardId=${board.boardId})}">Edit</a>
+</div>
+<div th:if="${loginInfo != null and loginInfo.name == board.name}">
+    <a th:href="@{/delete(boardId=${board.boardId})}">Delete</a>
+</div>
 </body>
 </html>

@@ -18,7 +18,7 @@
     <div class="login-info">
         <div class="container">
             <span class="login-info_user" th:if="${loginInfo != null}">
-                <span>Taeung Park</span>
+                <span th:text="${loginInfo.name}"></span>
             </span>
             <span class="login-info_logout" th:if="${loginInfo != null}">
                 <a href="/logout">logout</a>
@@ -46,37 +46,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>3</td>
+                <tr th:each="board : ${list}">
+                    <td th:text="${board.boardId}"></td>
                     <th>
-                        <a href="/board?id=3">title1</a>
-                        <p>test</p>
+                        <a th:href="@{/board(boardId=${board.boardId})}" th:text="${board.title}"></a>
                     </th>
-                    <td>1</td>
-                    <td>test1</td>
-                    <td>2023.09.04</td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <th>
-                        <a href="/board?id=2">title2</a>
-                        <p>test</p>
-                    </th>
-                    <td>0</td>
-                    <td>test2</td>
-                    <td>2023.09.03</td>
-                </tr>
-
-                <tr>
-                    <td>1</td>
-                    <th>
-                        <a href="/board?id=1">title3</a>
-                        <p>test3</p>
-                    </th>
-                    <td>1</td>
-                    <td>test3</td>
-                    <td>2023.09.02</td>
+                    <td th:text="${board.viewCnt}"></td>
+                    <td th:text="${board.name}"></td>
+                    <td th:text="${board.regdate}"></td>
                 </tr>
 
                 </tbody>
@@ -84,7 +61,11 @@
         </div>
 
         <div>
-            <a href="/writeForm">write</a>
+            <a href="/writeForm" th:if="${loginInfo != null}">write</a>
+            <span th:if="${loginInfo == null}">write</span>
+        </div>
+        <div>
+            <span th:each="n : ${#numbers.sequence(1, pageCount)}"><a th:href ="@{/(page=${n})}" th:text="${n}"></a></span>
         </div>
     </div>
 </section>

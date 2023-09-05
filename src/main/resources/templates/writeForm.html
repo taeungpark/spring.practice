@@ -7,7 +7,7 @@
 <body>
 <H1>Write Form</H1>
 <form action="/write" method="post">
-    name : <br>
+    name : <span th:text="${loginInfo.name}"></span><br>
     title : <input type="text" name="title" /><br />
     content : <br>
     <textarea name="content" cols="50" rows="5"></textarea><br />

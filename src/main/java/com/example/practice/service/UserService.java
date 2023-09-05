@@ -17,6 +17,10 @@ public class UserService {
 
     @Transactional
     public User addUser(String name, String email, String password){
+        User user1 = userDao.getUser(email);
+        if(user1 != null){
+            throw new RuntimeException("already exist");
+        }
         User user = userDao.addUser(name, email, password);
 //        userDao.getLastInsertId(); no need, when handle in addUser.
         userDao.mappingUserRole(user.getUserId()); // authorization

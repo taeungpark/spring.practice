@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class UserDao {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
-    private SimpleJdbcInsertOperations insertUser;
+    private final SimpleJdbcInsertOperations insertUser;
 
     public UserDao(DataSource dataSource) {
         jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -59,10 +59,15 @@ public class UserDao {
 
     @Transactional
     public User getUser(String email) {
-        String sql = "select user_id, email, name, password, regdate from user where email = :email";
-        SqlParameterSource params = new MapSqlParameterSource("email", email);
-        RowMapper<User> rowMapper = BeanPropertyRowMapper.newInstance(User.class);
-        User user = jdbcTemplate.queryForObject(sql, params, rowMapper);
-        return user;
+        try{
+            String sql = "select user_id, email, name, password, regdate from user where email = :email";
+            SqlParameterSource params = new MapSqlParameterSource("email", email);
+            RowMapper<User> rowMapper = BeanPropertyRowMapper.newInstance(User.class);
+            User user = jdbcTemplate.queryForObject(sql, params, rowMapper);
+            return user;
+        }catch (Exception e){
+            return null;
+        }
+
     }
 }
