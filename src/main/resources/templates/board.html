@@ -13,10 +13,10 @@
 <div>content : <span th:text="${board.content}"></span></div>
 
 <div><a href="/">List</a></div>
-<div th:if="${loginInfo != null and loginInfo.name == board.name}">
+<div th:if="${loginInfo != null and loginInfo.name == board.name or loginInfo.roles.contains('ROLE_ADMIN')}">
     <a th:href="@{/updateform(boardId=${board.boardId})}">Edit</a>
 </div>
-<div th:if="${loginInfo != null and loginInfo.name == board.name}">
+<div th:if="${loginInfo != null and loginInfo.name == board.name or loginInfo.roles.contains('ROLE_ADMIN')}">
     <a th:href="@{/delete(boardId=${board.boardId})}">Delete</a>
 </div>
 </body>

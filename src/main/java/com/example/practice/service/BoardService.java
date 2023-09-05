@@ -30,8 +30,15 @@ public class BoardService {
 
     @Transactional
     public Board getBoard(int boardId) {
+        return getBoard(boardId, true);
+    }
+
+    @Transactional
+    public Board getBoard(int boardId, boolean updateViewCnt){
         Board board = boardDao.getBoard(boardId);
-        boardDao.updateViewCnt(boardId);
+        if(updateViewCnt){
+            boardDao.updateViewCnt(boardId);
+        }
         return board;
     }
 
@@ -41,5 +48,15 @@ public class BoardService {
         if (board.getUserId() == userId){
             boardDao.deleteBoard(boardId);
         }
+    }
+
+    @Transactional
+    public void deleteBoard(int boardId) {
+        boardDao.deleteBoard(boardId);
+    }
+
+    @Transactional
+    public void updateBoard(int boardId, String title, String content) {
+        boardDao.updateBoard(boardId, title, content);
     }
 }

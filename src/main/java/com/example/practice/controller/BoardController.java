@@ -88,8 +88,46 @@ public class BoardController {
             return "redirect:/loginform";
         }
 
-        boardService.deleteBoard(loginInfo.getUserId(), boardId);
+        List<String> roles = loginInfo.getRoles();
+        if(roles.contains("ROLE_ADMIN")) {
+            boardService.deleteBoard(boardId);
+        }else {
+            boardService.deleteBoard(loginInfo.getUserId(), boardId);
+        }
 
         return "redirect:/";
+    }
+
+    @GetMapping("/updateform")
+    public String updateform(@RequestParam("boardId") int boardId, Model model, HttpSession session){
+        LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
+        if(loginInfo == null) {
+            return "redirect:/loginform";
+        }
+
+        Board board = boardService.getBoard(boardId, false);
+        model.addAttribute("board", board);
+        model.addAttribute("loginInfo", loginInfo);
+        return "updateform";
+    }
+
+    @PostMapping("update")
+    public String update(
+            @RequestParam("boardId") int boardId,
+            @RequestParam("title") String title,
+            @RequestParam("content") String content,
+            HttpSession session
+    ){
+        LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
+        if(loginInfo == null) {
+            return "redirect:/loginform";
+        }
+        Board board = boardService.getBoard(boardId, false);
+        if(board.getUserId() != loginInfo.getUserId()){
+            return "redirect:/board?boardId=" + boardId;
+        }
+
+        boardService.updateBoard(boardId, title, content);
+        return "redirect:/board?boardId=" + boardId;
     }
 }

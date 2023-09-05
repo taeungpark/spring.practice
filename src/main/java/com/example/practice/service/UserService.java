@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor //lombok create constructor (final field)
 public class UserService {
@@ -30,5 +32,10 @@ public class UserService {
     @Transactional
     public User getUser(String email) {
         return userDao.getUser(email);
+    }
+
+    @Transactional(readOnly = true)
+    public List<String> getRoles(int userId) {
+        return userDao.getRoles(userId);
     }
 }
