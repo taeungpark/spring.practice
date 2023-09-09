@@ -1,7 +1,7 @@
 package com.example.practice.controller;
 
+import com.example.practice.domain.User;
 import com.example.practice.dto.LoginInfo;
-import com.example.practice.dto.User;
 import com.example.practice.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

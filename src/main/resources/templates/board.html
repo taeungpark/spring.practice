@@ -6,17 +6,20 @@
 </head>
 <body>
 <H1 th:text="${board.title}"></H1>
-<div>name : <span th:text="${board.name}"></span></div>
+<div>name : <span th:text="${board.user.name}"></span></div>
 <div>title : <span th:text="${board.title}"></span></div>
 <div>count : <span th:text="${board.viewCnt}"></span></div>
 <div>date : <span th:text="${board.regdate}"></span></div>
 <div>content : <span th:text="${board.content}"></span></div>
 
 <div><a href="/">List</a></div>
-<div th:if="${loginInfo != null and loginInfo.name == board.name or loginInfo.roles.contains('ROLE_ADMIN')}">
+<div th:if="${loginInfo != null and loginInfo.name == board.user.name}">
     <a th:href="@{/updateform(boardId=${board.boardId})}">Edit</a>
 </div>
-<div th:if="${loginInfo != null and loginInfo.name == board.name or loginInfo.roles.contains('ROLE_ADMIN')}">
+<div th:if="${loginInfo != null and loginInfo.name == board.user.name and !loginInfo.roles.contains('ROLE_ADMIN')}">
+    <a th:href="@{/delete(boardId=${board.boardId})}">Delete</a>
+</div>
+<div th:if="${loginInfo != null and loginInfo.roles.contains('ROLE_ADMIN')}">
     <a th:href="@{/delete(boardId=${board.boardId})}">Delete</a>
 </div>
 </body>

@@ -1,6 +1,6 @@
 package com.example.practice.controller;
 
-import com.example.practice.dto.Board;
+import com.example.practice.domain.Board;
 import com.example.practice.dto.LoginInfo;
 import com.example.practice.service.BoardService;
 import jakarta.servlet.http.HttpSession;
@@ -20,13 +20,13 @@ public class BoardController {
 
     private final BoardService boardService;
     @GetMapping("/")
-    public String list(@RequestParam(name="page", defaultValue = "1") int page, HttpSession session, Model model){ // Spring insert HttpSession, Model
+    public String list(@RequestParam(name="page", defaultValue = "0") int page, HttpSession session, Model model){ // Spring insert HttpSession, Model
         LoginInfo loginInfo = (LoginInfo) session.getAttribute("loginInfo");
         model.addAttribute("loginInfo", loginInfo);
 
-        int totalCount = boardService.getTotalCount();
+        long totalCount = boardService.getTotalCount();
         List<Board> list = boardService.getBoards(page);
-        int pageCount = totalCount / 10;
+        long pageCount = totalCount / 10;
         if (totalCount %10 > 0){
             pageCount++;
         }
@@ -123,7 +123,7 @@ public class BoardController {
             return "redirect:/loginform";
         }
         Board board = boardService.getBoard(boardId, false);
-        if(board.getUserId() != loginInfo.getUserId()){
+        if(board.getUser().getUserId() != loginInfo.getUserId()){
             return "redirect:/board?boardId=" + boardId;
         }
 

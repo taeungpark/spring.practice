@@ -7,3 +7,12 @@ spring:
 #  thymeleaf:
 #    prefix: classpath:/html/ #can change classpath (default = /templates/)
 #    suffix: .fm #can change extension name (default = .html)
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
